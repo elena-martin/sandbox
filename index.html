@@ -1,9 +1,59 @@
-<html>
+<!DOCTYPE html>
     <head>
         <title>Happy Place Design Co.</title>
         <link rel="stylesheet" href="./styles.css">
     </head>
     <body>
-        <div id="header"></div>
+        
+        <div id="header">
+            <img id="logo" src="./images/Light@3x.png">
+        </div>
+        <div id="nav">
+            <ul>
+                <li><a href="index.html">FEATURED</a></li>
+                <li><a href="index.html">GRAPHICS</a></li>
+                <li><a href="index.html">ANIMATION</a></li>
+            </ul>
+        </div>
+        <div id="page-content">
+            <h1>Featured Projects</h1>
+            <div class="featured" id="featured-1" onmouseover="box1(); mouseOver();"onmouseout="mouseOut();">
+                <a href="./index.html">
+                <div class="featured-photo" id="featured-photo-1">
+                    <div class="featured-hover"></div>
+                </div>
+                <section class="featured-title">
+                    <h2> Project 1</h2>
+                    <h3>Click to view!</h3>
+                </section>
+                </a>
+            </div>
+            <div class="featured" id="featured-2" onmouseover="box2(); mouseOver();"onmouseout="mouseOut();">
+                <a href="./index.html">
+                <div class="featured-photo" id="featured-photo-2">
+                    <div class="featured-hover"></div>
+                </div>
+                <section class="featured-title">
+                    <h2> Project 2</h2>
+                    <h3>Click to view!</h3>
+                </section>
+                </a>
+            </div>
+            <div class="featured" id="featured-3" onmouseover="box3(); mouseOver();"onmouseout="mouseOut();">
+                <a href="./index.html">
+                <div class="featured-photo" id="featured-photo-3">
+                    <div class="featured-hover"></div>
+                </div>
+                <section class="featured-title">
+                    <h2> Project 3</h2>
+                    <h3>Click to view!</h3>
+                </section>
+                </a>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Copyright 2022</p>
+        </div>
+        <script src="./script.js"></script>
     </body>
 </html>

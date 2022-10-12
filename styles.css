@@ -1,5 +1,8 @@
+:root {
+    --headerHeight: 35%;
+}
 html {
-    background-color: #365673;
+    background-color: #252525;
     width: 100%;
     height: 100%;
 }
@@ -8,8 +11,8 @@ body {
 }
 #header {
     width: 100%;
-    height: 35%; 
-    background-color: #365673;
+    height: var(--headerHeight); 
+    background-color: #252525;
     text-align: center;
     background-image: url(./images/TexturedVignette.png);
     background-size: cover;
@@ -24,13 +27,29 @@ body {
 }
 
 #nav {
-    width: 100%;
+    width: 70%;
     position: absolute;
     z-index: 3;
+    text-align: left;
+    margin: 0 auto;
+    margin-left: 10%;
+}
+
+#nav-logo {
+    height: 200%;
+    position: absolute;
+    z-index: 4;
+    margin-top: -3%;
+    margin-left: 5%;
+}
+
+#nav p {
+    display: inline-block;
+    position: absolute;
 }
 
 #nav ul {
-    height: 5%; 
+    height: 4%; 
     width: 100%;
     list-style-type: none;
     position: relative;
@@ -38,22 +57,28 @@ body {
     padding-inline-start: 0%;
     margin: 0;
     padding-top: 0%;
-    background-image: url(./images/TexturedVignette.png);
-    background-size: cover;
-    background-color: #283C4F;
+    background-color: #494949;
+
+    margin-left: 12%;
+    border-top-right-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
 }
 
 #nav ul li{
     display: inline-block;
     position: relative;
     color: #F2E5D8;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    padding-left: 6%;
+    padding-right: 6%;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size:  1.25vw;
+}
+
+#nav ul li:first-of-type{
+    margin-left: 5%;
 }
 
 #nav ul li a{
@@ -84,6 +109,7 @@ body {
     padding-top: 5vw;
     padding-bottom: 3vw;
     text-align: center;
+    margin-top: 3%;
 }
 
 @font-face {

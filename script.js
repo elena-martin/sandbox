@@ -1,5 +1,69 @@
+const checkboxes = document.querySelectorAll('.filter');
+const filters = document.getElementById('selected-filters');
+const labels = document.getElementsByTagName('label')
+
 const featured = document.querySelectorAll('.featured');
-const boxes = document.querySelectorAll('.featured-hover');
+const boxes = document.querySelectorAll('.item-hover');
+
+const pageContent = document.getElementById('page-content')
+
+document.body.onload = load();
+
+function load(){
+    for (let i = 0; i < checkboxes.length; i++){
+        
+    }
+}
+
+function editFilters(){
+    let filterID = document.activeElement.id
+    let arrayItem = filterID.split('r').pop();
+    let activeFilters = document.getElementById('Filter '+ arrayItem)
+    
+    function activate(){
+        if (document.activeElement.checked == true){
+            console.log(filterID + ' Checked')
+            
+            let active = document.createElement('button');
+            let close = document.createElement('span');
+        
+            active.className = 'active-filter';
+            active.id = labels.item(arrayItem - 1).textContent;
+            close.textContent = '\xa0\xa0\u2716'
+            let buttonText = document.createTextNode(labels.item(arrayItem - 1).textContent) 
+            filters.appendChild(active);
+            active.appendChild(buttonText);
+            active.appendChild(close);
+            active.addEventListener('click', function() {
+                let active = document.getElementById(labels.item(arrayItem - 1).textContent);
+                active.remove();
+                checkboxes.item(arrayItem - 1).checked = false;
+            }, false)
+            }
+
+    }
+
+    function remove(){
+        if (document.activeElement.checked == false){
+            console.log(filterID + ' Un-Checked')
+
+            let active = document.getElementById(labels.item(arrayItem - 1).textContent);
+            active.remove()
+        }
+        
+    }
+
+    activate();
+    remove();
+}
+
+
+function createFigure(){
+
+}
+
+
+
 console.log(boxes)
 var boxNum = ""
 

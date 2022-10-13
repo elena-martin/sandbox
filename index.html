@@ -8,51 +8,96 @@
         <div id="header">
             <div id="nav">
                 <img id="nav-logo" src="./images/sandbox-logo.svg">
-                <p>Filters</p>
-                <ul>
-                    <li><a href="index.html">FEATURED</a></li>
-                    <li><a href="index.html">GRAPHICS</a></li>
-                    <li><a href="index.html">UX/UI</a></li>
-                    <li><a href="index.html">WORKSPACE</a></li>
-                </ul>
+                <div id="filter-select">
+                    <h4>Filters:</h4>
+                    <ul>
+                        <li>
+                            <input type="checkbox" class="filter" id="filter1" onclick="editFilters();">
+                            <label for="filter1">Filter 1</label>
+                        </li>
+                        
+                        <li>
+                            <input type="checkbox" class="filter" id="filter2" onclick="editFilters();"> 
+                            <label for="filter2">Filter 2</label>
+                        </li>
+                        
+                        <li>
+                            <input type="checkbox" class="filter" id="filter3" onclick="editFilters();">
+                            <label for="filter3">Filter 3</label>
+                        </li>
+
+                        <li>
+                            <input type="checkbox" class="filter" id="filter4" onclick="editFilters();">
+                            <label for="filter4">Filter 4</label>
+                        </li>
+                        
+                        <li>
+                            <input type="checkbox" class="filter" id="filter5" onclick="editFilters();">
+                            <label for="filter5">Filter 5</label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <p id="selected-filters-label">Active Filters:</p>
+                <div id="selected-filters">
+                    
+                </div>
             </div>
         </div>
         
         <div id="page-content">
-            <h1>Featured Projects</h1>
-            <div class="featured" id="featured-1" onmouseover="box1(); mouseOver();"onmouseout="mouseOut();">
+            <ul class="gallery">
+                <li class="gallery-item">
+                    <div class="item-hover">
+                        <span>
+                            <h1> Project 1</h1>
+                            <h2>Tags</h2>
+                            <h3>Click to View</h3>
+                        </span>
+                    </div>
+                    <img src="images/sandbox-logo.svg">
+                </li>
+            </ul>
+
+            <!--
+            <figure class="featured" id="featured-1" onmouseover="box1(); mouseOver();"onmouseout="mouseOut();">
                 <a href="./index.html">
-                <div class="featured-photo" id="featured-photo-1">
-                    <div class="featured-hover"></div>
-                </div>
-                <section class="featured-title">
-                    <h2> Project 1</h2>
-                    <h3>Click to view!</h3>
-                </section>
+                    <div class="featured-photo" id="featured-photo-1">
+                        <img class="fig-image" id="fig-image-1" src="images/sandbox-logo.svg">
+                        <div class="featured-hover">
+                            <div class="fig-info">
+                                <h2> Project 1</h2>
+                                <h3>Click to view!</h3>
+                            </div>
+                        </div>
+                    </div>
                 </a>
-            </div>
-            <div class="featured" id="featured-2" onmouseover="box2(); mouseOver();"onmouseout="mouseOut();">
+            </figure>
+            <figure class="featured" id="featured-2" onmouseover="box2(); mouseOver();"onmouseout="mouseOut();">
                 <a href="./index.html">
                 <div class="featured-photo" id="featured-photo-2">
-                    <div class="featured-hover"></div>
+                    <div class="featured-hover">
+                        <div class="fig-info">
+                            <h2> Project 2</h2>
+                            <h3>Click to view!</h3>
+                        </div>
+                    </div>
                 </div>
-                <section class="featured-title">
-                    <h2> Project 2</h2>
-                    <h3>Click to view!</h3>
-                </section>
+                
                 </a>
-            </div>
-            <div class="featured" id="featured-3" onmouseover="box3(); mouseOver();"onmouseout="mouseOut();">
+            </figure>
+            <figure class="featured" id="featured-3" onmouseover="box3(); mouseOver();"onmouseout="mouseOut();">
                 <a href="./index.html">
-                <div class="featured-photo" id="featured-photo-3">
-                    <div class="featured-hover"></div>
-                </div>
-                <section class="featured-title">
-                    <h2> Project 3</h2>
-                    <h3>Click to view!</h3>
-                </section>
+                    <div class="featured-photo" id="featured-photo-3">
+                        <div class="featured-hover">
+                            <div class="fig-info">
+                                <h2> Project 3</h2>
+                                <h3>Click to view!</h3>
+                            </div>
+                        </div>
+                    </div>
                 </a>
-            </div>
+            </figure>-->
         </div>
         <div id="footer">
             <p>Copyright 2022</p>

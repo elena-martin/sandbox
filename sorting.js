@@ -6,7 +6,7 @@ function readJSON(filePath, cb){
         }
         try {
             const tag = JSON.parse(fileData);
-            return cb && cb(null, object);
+            return cb && cb(null, tag);
         } catch (err){
             return cb && cb(err);
         }
@@ -14,7 +14,7 @@ function readJSON(filePath, cb){
     });
 }
 
-readJSON("./tag-list.json", (err, taglist) => {
+readJSON("./taglist.json", (err, taglist) => {
     if (err) {
         console.log(err);
         return;

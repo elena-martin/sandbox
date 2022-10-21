@@ -2,106 +2,204 @@
     <head>
         <title>Happy Place Design Co.</title>
         <link rel="stylesheet" href="./styles.css">
+        <!--Imports a model-viewer JavaScript code -->
+        <!--It helps to handle how the 3D Object would be displayed -->
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+        <script type="module" src="./sorting.js"></script>
     </head>
     <body>
         
-        <div id="header">
-            <div id="nav">
-                <img id="nav-logo" src="./images/sandbox-logo.svg">
-                <div id="filter-select">
-                    <h4>Filters:</h4>
+        <div id="page-content" class="body">
+            <div id="filters">
+                <div id="filter-select" >
+                    <div id="filters-intro">
+                        <h1>Filters</h1>
+                        <h2>Click on a filter to sort projects. Click on a project to learn more!</h2>
+                    </div>
                     <ul>
-                        <li>
-                            <input type="checkbox" class="filter" id="filter1" onclick="editFilters();">
-                            <label for="filter1">Filter 1</label>
-                        </li>
-                        
-                        <li>
-                            <input type="checkbox" class="filter" id="filter2" onclick="editFilters();"> 
-                            <label for="filter2">Filter 2</label>
-                        </li>
-                        
-                        <li>
-                            <input type="checkbox" class="filter" id="filter3" onclick="editFilters();">
-                            <label for="filter3">Filter 3</label>
-                        </li>
+                        <div id="category" class="filter-cat">
+                            <h3>Design Categories</h3>
+                            <li>
+                                <input type="checkbox" class="filter" id="filter1" onclick="editFilters();"> 
+                                <label for="filter1">Graphic/Print Design</label>
+                            </li>
+                            
+                            <li>
+                                <input type="checkbox" class="filter" id="filter2" onclick="editFilters();">
+                                <label for="filter2">Branding</label>
+                            </li>
 
-                        <li>
-                            <input type="checkbox" class="filter" id="filter4" onclick="editFilters();">
-                            <label for="filter4">Filter 4</label>
-                        </li>
-                        
-                        <li>
-                            <input type="checkbox" class="filter" id="filter5" onclick="editFilters();">
-                            <label for="filter5">Filter 5</label>
-                        </li>
+                            <li>
+                                <input type="checkbox" class="filter" id="filter3" onclick="editFilters();">
+                                <label for="filter3">Web Design</label>
+                            </li>
+                            
+                            <li>
+                                <input type="checkbox" class="filter" id="filter4" onclick="editFilters();">
+                                <label for="filter4">Project Management</label>
+                            </li>
+
+                            <li>
+                                <input type="checkbox" class="filter" id="filter5" onclick="editFilters();">
+                                <label for="filter5">Other</label>
+                            </li>
+                        </div>
+                        <div id="type" class="filter-cat">
+                            <h3>Project Depth</h3>
+                            <li>
+                                <input type="checkbox" class="filter" id="filter6" onclick="editFilters();">
+                                <label for="filter6">Full Projects</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" class="filter" id="filter7" onclick="editFilters();">
+                                <label for="filter7">Overviews</label>
+                            </li>
+                        </div>
+                        <div id="status" class="filter-cat">
+                            <h3>Project Status</h3>
+                            <li>
+                                <input type="checkbox" class="filter" id="filter8" onclick="editFilters();">
+                                <label for="filter8">Work In Progress</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" class="filter" id="filter9" onclick="editFilters();">
+                                <label for="filter9">Completed</label>
+                            </li>
+                        </div>
                     </ul>
                 </div>
                 
-                <p id="selected-filters-label">Active Filters:</p>
-                <div id="selected-filters">
-                    
-                </div>
+                <div id="divider"></div>
             </div>
-        </div>
-        
-        <div id="page-content">
-            <ul class="gallery">
-                <li class="gallery-item">
+            <div id="selected-filters" class="hide">
+                <p id="selected-filters-label">Active Filters:</p>
+            </div>
+            <span id="gallery">
+                <ul class="gallery" onclick="getFigure(event);">
+                <li class="gallery-item web" onclick="lightboxOpen();">
                     <div class="item-hover">
-                        <span>
-                            <h1> Project 1</h1>
-                            <h2>Tags</h2>
-                            <h3>Click to View</h3>
+                        <span class="hover-info">
+                            <h1>Sandbox Project</h1>
+                            <h2>Web Design</h2>
                         </span>
                     </div>
-                    <img src="images/sandbox-logo.svg">
+                    <img src="images/sandbox-logo.svg" alt="sandbox-logo">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
                 </li>
-            </ul>
-
-            <!--
-            <figure class="featured" id="featured-1" onmouseover="box1(); mouseOver();"onmouseout="mouseOut();">
-                <a href="./index.html">
-                    <div class="featured-photo" id="featured-photo-1">
-                        <img class="fig-image" id="fig-image-1" src="images/sandbox-logo.svg">
-                        <div class="featured-hover">
-                            <div class="fig-info">
-                                <h2> Project 1</h2>
-                                <h3>Click to view!</h3>
-                            </div>
-                        </div>
+                <li class="gallery-item web case-study" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Interactive Map</h1>
+                            <h2>Web Design</h2>
+                        </span>
                     </div>
-                </a>
-            </figure>
-            <figure class="featured" id="featured-2" onmouseover="box2(); mouseOver();"onmouseout="mouseOut();">
-                <a href="./index.html">
-                <div class="featured-photo" id="featured-photo-2">
-                    <div class="featured-hover">
-                        <div class="fig-info">
-                            <h2> Project 2</h2>
-                            <h3>Click to view!</h3>
-                        </div>
+                    <img src="images/botw-gallery.png" alt="botw">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>YouTube Thumbnail</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
                     </div>
-                </div>
+                    <img src="images/Thumbnail1.webp" alt="thumbnail">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Info Card</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
+                    </div>
+                    <img src="images/pff-card-front.webp" alt="scarlet-witch-logo">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item branding" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Scarlet Witch Logo</h1>
+                            <h2>Branding</h2>
+                        </span>
+                    </div>
+                    <img src="images/scarlet-witch-logo.webp" alt="scarlet-witch-logo">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Forum Signature</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
+                    </div>
+                    <img src="images/Av-JLift-Sig.webp" alt="av-jlift-signature">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Neon Logo</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
+                    </div>
+                    <img src="images/neon-logo.webp" alt="neon-logo">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Class of 2020 Sign</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
+                    </div>
+                    <img src="images/ben-sign.webp" alt="class-of-2020-yard-sign">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item branding" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Happy Place Branding</h1>
+                            <h2>Branding</h2>
+                        </span>
+                    </div>
+                    <img src="images/HappyPlace.webp" alt="happy-place-logo">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Forum Signature</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
+                    </div>
+                    <img src="images/mikkosig.webp" alt="mikko-signature">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
+                <li class="gallery-item gfx branding" onclick="lightboxOpen();">
+                    <div class="item-hover">
+                        <span class="hover-info">
+                            <h1>Stella Logo Design</h1>
+                            <h2>Graphic/Print Design</h2>
+                        </span>
+                    </div>
+                    <img src="images/stella-logo.webp" alt="stella-logo">
+                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                </li>
                 
-                </a>
-            </figure>
-            <figure class="featured" id="featured-3" onmouseover="box3(); mouseOver();"onmouseout="mouseOut();">
-                <a href="./index.html">
-                    <div class="featured-photo" id="featured-photo-3">
-                        <div class="featured-hover">
-                            <div class="fig-info">
-                                <h2> Project 3</h2>
-                                <h3>Click to view!</h3>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </figure>-->
+                </ul>
+            </span>
+            <!--<div id="model-1" class="model-viewer">-->
+                <!-- 3D objsect -->
+                <!-- This inserts the 3D object inside the aside container -->
+                <!--<model-viewer src="images/martie-sun.gltf" alt="Martie" auto-rotate camera-controls ar ios-src="images/martie-sun.gltf"></model-viewer>-->
+            <!--</div>-->
         </div>
-        <div id="footer">
+        <div id="footer" class="body">
             <p>Copyright 2022</p>
         </div>
         <script src="./script.js"></script>
+        
     </body>
 </html>

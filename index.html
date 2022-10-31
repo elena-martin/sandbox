@@ -6,10 +6,8 @@
         <!--It helps to handle how the 3D Object would be displayed -->
         <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
         <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-        <script type="module" src="./sorting.js"></script>
     </head>
-    <body>
-        
+    <body onload="load();">
         <div id="page-content" class="body">
             <div id="filters">
                 <div id="filter-select" >
@@ -27,49 +25,44 @@
                             
                             <li>
                                 <input type="checkbox" class="filter" id="filter2" onclick="editFilters();">
-                                <label for="filter2">Branding</label>
+                                <label for="filter2">Web Design</label>
                             </li>
 
                             <li>
                                 <input type="checkbox" class="filter" id="filter3" onclick="editFilters();">
-                                <label for="filter3">Web Design</label>
+                                <label for="filter3">Branding</label>
                             </li>
                             
                             <li>
                                 <input type="checkbox" class="filter" id="filter4" onclick="editFilters();">
-                                <label for="filter4">Project Management</label>
+                                <label for="filter4">UX/UI</label>
                             </li>
 
                             <li>
                                 <input type="checkbox" class="filter" id="filter5" onclick="editFilters();">
-                                <label for="filter5">Other</label>
+                                <label for="filter5">Other Projects</label>
                             </li>
                         </div>
                         <div id="type" class="filter-cat">
                             <h3>Project Depth</h3>
                             <li>
                                 <input type="checkbox" class="filter" id="filter6" onclick="editFilters();">
-                                <label for="filter6">Full Projects</label>
+                                <label for="filter6">Solo Designs</label>
                             </li>
                             <li>
                                 <input type="checkbox" class="filter" id="filter7" onclick="editFilters();">
-                                <label for="filter7">Overviews</label>
+                                <label for="filter7">Full Projects</label>
                             </li>
                         </div>
                         <div id="status" class="filter-cat">
                             <h3>Project Status</h3>
                             <li>
                                 <input type="checkbox" class="filter" id="filter8" onclick="editFilters();">
-                                <label for="filter8">Work In Progress</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" class="filter" id="filter9" onclick="editFilters();">
-                                <label for="filter9">Completed</label>
+                                <label for="filter8">Works In Progress</label>
                             </li>
                         </div>
                     </ul>
                 </div>
-                
                 <div id="divider"></div>
             </div>
             <div id="selected-filters" class="hide">
@@ -77,17 +70,17 @@
             </div>
             <span id="gallery">
                 <ul class="gallery" onclick="getFigure(event);">
-                <li class="gallery-item web" onclick="lightboxOpen();">
+                <li class="gallery-item uxui" onclick="lightboxOpen();">
                     <div class="item-hover">
                         <span class="hover-info">
                             <h1>Sandbox Project</h1>
-                            <h2>Web Design</h2>
+                            <h2>UX/UI</h2>
                         </span>
                     </div>
                     <img src="images/sandbox-logo.svg" alt="sandbox-logo">
                     <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
                 </li>
-                <li class="gallery-item web case-study" onclick="lightboxOpen();">
+                <li class="gallery-item web" onclick="lightboxOpen();">
                     <div class="item-hover">
                         <span class="hover-info">
                             <h1>Interactive Map</h1>
@@ -127,15 +120,18 @@
                     <img src="images/scarlet-witch-logo.webp" alt="scarlet-witch-logo">
                     <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
                 </li>
-                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                <li class="gallery-item gfx" onclick="lightboxOpenMulti();">
                     <div class="item-hover">
                         <span class="hover-info">
-                            <h1>Forum Signature</h1>
+                            <h1>Forum Graphics</h1>
                             <h2>Graphic/Print Design</h2>
                         </span>
                     </div>
                     <img src="images/Av-JLift-Sig.webp" alt="av-jlift-signature">
-                    <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
+                    <img class="lightbox-only" src="./images/Av-JLift-Sig.webp" alt="av-jlift-signature">
+                    <img class="lightbox-only" src="./images/mikkosig.webp" alt="mikkolikoli-signature">
+                    <img class="lightbox-only" src="./images/Totally-80-s-PB.webp" alt="practice-briefing-banner">
+                    <p class="gallery-desc" style="display: none;">User signatures and post banners for use on the Tactical Gaming forums&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Width Requirement: 600px</p>
                 </li>
                 <li class="gallery-item gfx" onclick="lightboxOpen();">
                     <div class="item-hover">
@@ -167,16 +163,16 @@
                     <img src="images/HappyPlace.webp" alt="happy-place-logo">
                     <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
                 </li>
-                <li class="gallery-item gfx" onclick="lightboxOpen();">
+                <li class="gallery-item other"><a href="./images/PDF/SouthernGreenInfographic.pdf" target="_blank">
                     <div class="item-hover">
                         <span class="hover-info">
-                            <h1>Forum Signature</h1>
-                            <h2>Graphic/Print Design</h2>
+                            <h1>Fatbergs Infographic</h1>
+                            <h2>Data Visualization</h2>
                         </span>
                     </div>
-                    <img src="images/mikkosig.webp" alt="mikko-signature">
+                    <img src="images/SouthernGreenInfographic.jpg" alt="mikko-signature">
                     <p class="gallery-desc" style="display: none;">YouTube thumbnail created for a client&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Size Requirement: 1280px × 720px </p>
-                </li>
+                </a></li>
                 <li class="gallery-item gfx branding" onclick="lightboxOpen();">
                     <div class="item-hover">
                         <span class="hover-info">
@@ -200,6 +196,6 @@
             <p>Copyright 2022</p>
         </div>
         <script src="./script.js"></script>
-        
+        <!--<script src="./sorting.js"></script>-->
     </body>
 </html>

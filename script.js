@@ -18,11 +18,11 @@ const activeFilters = document.getElementById('selected-filters')
 const gfxFilter = document.getElementsByClassName('gfx');
 const webFilter = document.getElementsByClassName('web');
 const brandingFilter = document.getElementsByClassName('branding');
-const pmFilter = document.getElementsByClassName('pm');
+const uxuiFilter = document.getElementsByClassName('uxui');
 const otherFilter = document.getElementsByClassName('other');
 
 const fullProjFilter = document.getElementsByClassName('full');
-const overviewFilter = document.getElementsByClassName('overview');
+const singleFilter = document.getElementsByClassName('single');
 
 const wipFilter = document.getElementsByClassName('wip');
 const completedFilter = document.getElementsByClassName('completed');
@@ -33,6 +33,8 @@ boxContent.id = "boxContent";
 
 const boxImg = document.createElement("img");
 boxImg.id = "boxImg";
+
+const multiImg = document.getElementsByClassName("lightbox-only");
 
 const imgContent = document.createElement("div");
 imgContent.id = "imgContent";
@@ -48,6 +50,11 @@ closeLightbox.id = "close-lightbox";
 closeLightbox.textContent="\u2716"
 closeLightbox.setAttribute("onclick","lightboxClose();")
 
+const closeLightboxMulti = document.createElement("a");
+closeLightboxMulti.id = "close-lightbox";
+closeLightboxMulti.textContent="\u2716"
+closeLightboxMulti.setAttribute("onclick","lightboxCloseMulti();")
+
 var source = ""
 var relsource = ""
 var title = ""
@@ -56,10 +63,16 @@ var desc = ""
 document.body.onload = load(); lightbox();
 
 function load(){
-
+    editFilters();
+    for (let i = 0; i < galleryItems.length; i++) {
+        let items = galleryItems.item(i);
+        let itemsClasses = items.classList;
+        itemsClasses.add('loaded')
+        console.log(itemsClasses)
+    };
 };
 
-function editFilters(){
+function editFilters()  {
     let filterID = document.activeElement.id
     let arrayItem = filterID.split('r').pop();
     
@@ -89,16 +102,18 @@ function editFilters(){
                 checkRemove();
                 
             }, false)
-            hideItems();
+            
             let galShift = gallery.classList;
             galShift.add('bump-gallery')
             console.log(galShift)
+
+           
         }
     };
 
     //Checks if any other filters are active. If not, hides the "selected-filters" div. Automatically called before running remove();
     function checkRemove(){
-        if (checkboxes.item(0).checked == false && checkboxes.item(1).checked == false && checkboxes.item(2).checked == false && checkboxes.item(3).checked == false && checkboxes.item(4).checked == false && checkboxes.item(5).checked == false && checkboxes.item(6).checked == false && checkboxes.item(7).checked == false && checkboxes.item(8).checked == false) {
+        if (checkboxes.item(0).checked == false && checkboxes.item(1).checked == false && checkboxes.item(2).checked == false && checkboxes.item(3).checked == false && checkboxes.item(4).checked == false && checkboxes.item(5).checked == false && checkboxes.item(6).checked == false && checkboxes.item(7).checked == false) {
             console.log("No Filters");
             document.getElementById('selected-filters').className = 'animate-out'
             let hide = document.getElementsByClassName("animate-out")
@@ -109,6 +124,10 @@ function editFilters(){
             galShift.remove('bump-gallery')
             console.log(galShift)
             
+            for (let i = 0; i < galleryItems.length; i++) {
+                let itemClasses = galleryItems[i].classList;
+                itemClasses.add('loaded')
+            }
         }
 
     }
@@ -119,11 +138,6 @@ function editFilters(){
             console.log(filterID + ' Un-Checked')
             let active = document.getElementById(labels.item(arrayItem - 1).textContent);
             active.remove();
-
-            for (let i = 0; i < galleryItems.length; i++) {
-                let items = galleryItems.item(i)
-                let itemsClasses = items.classList
-            };
         }
         
     };
@@ -136,96 +150,84 @@ function editFilters(){
 
             if (checkboxes[i].checked == true) {
                 for (let i2 = 0; i2 < galleryItems.length; i2++) {
+                    let itemClasses = galleryItems[i2].classList;
+
                     //FIRST FILTER - GFX
                     if (checkboxes[0].checked == true && galleryItems[i2].classList.contains('gfx') == true) {
-                            console.log(galleryItems[i2])
-                            galleryItems[i2].classList.add('active')
-                            if (galleryItems[i2].classList.contains('inactive') == true){
-                                galleryItems[i2].classList.replace('inactive', 'active')
-                            }
-                            
-                            galleryItems[i2].style = "opacity: 1; display: flex"
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
                     };
-                    if (checkboxes[0].checked == true && galleryItems[i2].classList.contains('gfx') == false){
-                        console.log(galleryItems[i2])
-                        galleryItems[i2].classList.add ('inactive')
-                        if (galleryItems[i2].classList.contains('active') == true){
-                            galleryItems[i2].classList.replace('active', 'inactive')
-                        }
-                        galleryItems[i2].style = "opacity: 0;"
-                        setTimeout(() => {
-                            galleryItems[i2].style = "opacity: 0; display: none"
-                        }, "1000");
-                        
+                    if (checkboxes[0].checked == false && galleryItems[i2].classList.contains('gfx') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
                     };
-                    //SECOND FILTER - BRANDING
-                    if (checkboxes[1].checked == true && galleryItems[i2].classList.contains('branding') == true) {
-                        console.log(galleryItems[i2])
-                        if (galleryItems[i2].classList.contains('inactive') == true){
-                            galleryItems[i2].classList.replace('inactive', 'active')
-                        } else {
-                            galleryItems[i2].classList.add('active')
-                        }
+                    //SECOND FILTER - WEB
+                    if (checkboxes[1].checked == true && galleryItems[i2].classList.contains('web') == true) {
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
                     };
-                    if (checkboxes[1].checked == true && galleryItems[i2].classList.contains('branding') == false){
+                    if (checkboxes[1].checked == false && galleryItems[i2].classList.contains('web') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    //THIRD FILTER - BRANDING
+                    if (checkboxes[2].checked == true && galleryItems[i2].classList.contains('branding') == true) {
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    if (checkboxes[2].checked == false && galleryItems[i2].classList.contains('branding') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    //FOURTH FILTER - UX & UI
+                    if (checkboxes[3].checked == true && galleryItems[i2].classList.contains('uxui') == true) {
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    if (checkboxes[3].checked == false && galleryItems[i2].classList.contains('uxui') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    //FIFTH FILTER - OTHER
+                    if (checkboxes[4].checked == true && galleryItems[i2].classList.contains('other') == true) {
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    if (checkboxes[4].checked == false && galleryItems[i2].classList.contains('other') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
+                    };
 
-                        galleryItems[i2].classList.add ('inactive')
-                        if (galleryItems[i2].classList.contains('active') == true){
-                            galleryItems[i2].classList.replace('active', 'inactive')
-                        }
-                        
+                    //SIXTH FILTER - SOLO DESIGNS
+                    if (checkboxes[5].checked == true && galleryItems[i2].classList.contains('single') == true) {
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    if (checkboxes[5].checked == false && galleryItems[i2].classList.contains('single') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
+                    };
+
+                    //SEVENTH FILTER - FULL PROJECTS
+                    if (checkboxes[6].checked == true && galleryItems[i2].classList.contains('full') == true) {
+                        itemClasses.add('active')
+                        itemClasses.remove ('loaded')
+                    };
+                    if (checkboxes[6].checked == false && galleryItems[i2].classList.contains('full') == true){
+                        itemClasses.remove ('active')
+                        itemClasses.remove ('loaded')
                     };
                 };
             } if (checkboxes[i].checked == false) {
+                let itemClasses = galleryItems[i].classList;
                 console.log("Nothing Checked")
-                for (let i2 = 0; i2 < galleryItems.length; i2++) {
-                    console.log(galleryItems[i2]);
-                    galleryItems[i2].classList.remove('inactive');
-                    galleryItems[i2].classList.remove('active')
-                    
-                    galleryItems[i2].style = "opacity: 1: display: flex"
-                    
-        
-                };
             };
         }
-    }
-
-    function hideItems() {
-        let num = currentlyActive.length
-        let active = currentlyActive.item(num - 1);
-        console.log(active)
-        getGalleryItemClasses();
-        function getGalleryItemClasses(){
-
-            for (let i = 0; i < galleryItems.length; i++) {
-                let items = galleryItems.item(i)
-
-                let itemsClasses = items.classList;
-                
-                console.log(itemsClasses);
-                
-                };
-
-        }
-
-    }
-    function showItems() {
-        if (active.id.toString() !== "Graphic/Print Design") {
-            classes.replace("active", "")
-            itemsClasses.replace("inactive", "")
-        }
-        console.log(currentlyActive);
     }
 
     checkBoxes();
     activate();
     remove();
-}
-
-
-function createItem(){
-
 }
 
 
@@ -236,7 +238,7 @@ function lightbox(){
     
     document.body.insertBefore(lightbox, pageContent);
 
-    lightbox.appendChild(closeLightbox);
+    
     lightbox.appendChild(boxContent);
     boxContent.appendChild(boxImg);
     lightbox.appendChild(imgContent);
@@ -252,9 +254,10 @@ function getFigure(e){
     relsource = source.split('x/').pop();
     
     title = e.target.children[0].firstElementChild.textContent
-    let descP = e.target.nextElementSibling.nextElementSibling
+    let descP = e.target.parentElement.lastElementChild
     desc = descP.textContent
     console.log(desc);
+
     
     boxImg.setAttribute("src", relsource);
     imgTitle.textContent = title;
@@ -264,8 +267,9 @@ function getFigure(e){
 /*----------LIGHTBOX FUNCTIONS----------*/
 function lightboxOpen(){
     let lightbox = document.getElementById('lightbox')
-    
+    lightbox.appendChild(closeLightbox);
     console.log(siteBody);
+    boxImg.style = "display: block"
 
     siteBody[0].style = "transition: .5s -webkit-filter linear; -webkit-filter: blur(10px); -moz-filter: blur(10px); -o-filter: blur(10px); -ms-filter: blur(10px); filter: blur(10px);"
     siteBody[1].style = "transition: .5s -webkit-filter linear; -webkit-filter: blur(10px); -moz-filter: blur(10px); -o-filter: blur(10px); -ms-filter: blur(10px); filter: blur(10px);"
@@ -276,6 +280,32 @@ function lightboxOpen(){
     }, "100");
     boxImg.setAttribute("target", "_blank");
     disableScroll();
+}
+
+function lightboxOpenMulti(){
+    let lightbox = document.getElementById('lightbox')
+    lightbox.appendChild(closeLightboxMulti);
+    boxImg.style = "display: none"
+
+    siteBody[0].style = "transition: .5s -webkit-filter linear; -webkit-filter: blur(10px); -moz-filter: blur(10px); -o-filter: blur(10px); -ms-filter: blur(10px); filter: blur(10px);"
+    siteBody[1].style = "transition: .5s -webkit-filter linear; -webkit-filter: blur(10px); -moz-filter: blur(10px); -o-filter: blur(10px); -ms-filter: blur(10px); filter: blur(10px);"
+
+    lightbox.style = "display: block";
+    setTimeout(() => {
+        lightbox.style = "opacity: 1";
+    }, "100");
+    disableScroll();
+    for (let i = 0; i < (multiImg.length); i++){
+        const newImg = document.createElement("img");
+        console.log(multiImg);
+        boxContent.appendChild(newImg);
+        newImg.setAttribute("target", "_blank");
+        newImg.setAttribute("src", multiImg[i].src);
+        newImg.className = "multiImg"
+
+        console.log(multiImg[i])
+    }
+    
 }
 
 function lightboxClose(){
@@ -290,6 +320,31 @@ function lightboxClose(){
     setTimeout(() => {
         lightbox.style = "display: none";
     }, "500");
+}
+
+function lightboxCloseMulti(){
+    let lightbox = document.getElementById('lightbox')
+    lightbox.style = "opacity: 0";
+    siteBody[0].style = "transition: .5s -webkit-filter linear; -webkit-filter: blur(0px); -moz-filter: blur(0px); -o-filter: blur(0px); -ms-filter: blur(0px); filter: blur(0px);"
+    siteBody[1].style = "transition: .5s -webkit-filter linear; -webkit-filter: blur(0px); -moz-filter: blur(0px); -o-filter: blur(0px); -ms-filter: blur(0px); filter: blur(0px);"
+
+    closeLightbox.style = "cursor: pointer"
+    
+    enableScroll();
+    setTimeout(() => {
+        lightbox.style = "display: none";
+    }, "500");
+
+    
+    
+    function removeMulti(images){
+        for (let i = 0; i < images.length; i++){
+            console.log(images)
+            images[i].parentNode.removeChild(images[i]);
+        }
+    }
+    removeMulti(document.querySelectorAll('.multiImg'));
+    
 }
 
 /*----------DISABLE SCROLL IN LIGHTBOX----------*/
